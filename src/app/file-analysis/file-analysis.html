@@ -1,0 +1,100 @@
+<div class="app-container">
+  <!-- LEFT: CONTROL PANEL -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">AI</div>
+      <div class="brand-text">
+        <h1>CSV Chat</h1>
+        <p>Talk with your data</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Data settings</h2>
+      <p class="card-subtitle">Upload CSV แล้วเลือก sheet / column</p>
+
+      <label class="field-label">Upload CSV</label>
+      <label class="file-input">
+        <input type="file"
+            accept=".csv,.xlsx"
+            (change)="onFileSelected($event)" />
+        <span class="file-input-label">Choose file</span>
+      </label>
+
+      <!-- <label class="field-label">Select sheet</label>
+      <select class="select" disabled>
+        <option>-- Select sheet --</option>
+      </select> -->
+      <select [(ngModel)]="selectedSheet" (change)="onSheetSelected(selectedSheet)">
+        @for (s of sheetList; track s) {
+          <option [value]="s">
+            {{ s }}
+          </option>
+        }
+      </select>
+
+      <!-- <label class="field-label">Select column</label>
+      <select class="select" disabled>
+        <option>-- Select column --</option>
+      </select> -->
+       <select [(ngModel)]="selectedColumn">
+        @for (c of columnList; track c) {
+          <option [value]="c">
+            {{ c }}
+          </option>
+        }
+      </select>
+
+
+      <label class="field-label">Select model</label>
+      <select class="select">
+        <option>GPT-4.1</option>
+        <option>o3-mini</option>
+        <option>Custom model</option>
+      </select>
+
+      <button class="primary-btn" disabled>
+        Generate assistant
+      </button>
+    </div>
+  </aside>
+
+  <!-- RIGHT: CHAT PANEL -->
+  <main class="chat-panel">
+    <header class="chat-header">
+      <div class="chat-title">
+        <h2>Chat with CSV Bot</h2>
+        <p>ถามคำถามเกี่ยวกับข้อมูลในไฟล์ของคุณได้เลย</p>
+      </div>
+      <div class="chat-status">
+        <span class="status-dot"></span>
+        <span>Online</span>
+      </div>
+    </header>
+
+    <section class="chat-body">
+      <div class="message bot">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          สวัสดีค่ะ 👋 อัพโหลดไฟล์ CSV แล้วถามคำถามเกี่ยวกับข้อมูลได้เลย
+        </div>
+      </div>
+
+      <div class="message user">
+        <div class="bubble">
+          ช่วยสรุปยอดขายเฉลี่ยต่อเดือนให้หน่อย
+        </div>
+      </div>
+    </section>
+
+    <footer class="chat-input-area">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          placeholder="พิมพ์คำถามเกี่ยวกับข้อมูลของคุณ..."
+        />
+        <button class="icon-btn">➤</button>
+      </div>
+    </footer>
+  </main>
+</div>
